@@ -1,377 +1,112 @@
-#Denmark 
-|Copenhagen
-*55.676097*12.568337* 
-Vacation with family when I was young. <br/>Job interview at IBM. Hung out with Peter who lives there. Been at the IBM offices many times. First series of IBM job interviews was here.
-
-|Odense
-*55.403756*10.402370* 
-Visited the university to pick up Marcus' sister Line.
-
-|Aabenraa
-*55.040852*9.415159* 
-Vacation with the family.
-
-|Hjortshoej
-*56.247552*10.265404* 
-Grew up there.
-
-|Aarhus*56.162939*10.203921*
-Moved there after leaving home. Moved back after having studied at UCSD.
-
-|Hvide Sande
-*56.011793*8.127935* 
-Camping vacation with the family. Very windy. The caravan rocked at night because of the wind. Two huge container ships beached because of the wind.
-
-|Aalborg
-*57.048820*9.921747* 
-Lan at Hemme's place.
-
-|Randers
-*1*1*
-TODO coordinates! Regnsskov som barn. Lan at Anders' place.
-
-|Skagen
-*57.725004*10.579186* 
-Vacation with the family. Walks along the beach. Went to "grenen" where Vesterhavet hits Kattegat.
-
 #United States of America
 |FL, Key West
 *24.555059*-81.779987* 
-Amazing drive from Miami across many bridges and small islands. Bought beer, illegally, for the first time in the states. I don't think the bartender could decipher my Danish driver's license. <br/>Drove there with my parents later.
+comment1
 
 |FL, Miami
 *25.789097*-80.204044* 
-Landed here first time I was in the states. Trip after high school started here. Most days were spent either going to the airport to get my luggage or on the beach. Lived at a motel in south beach 2 blocks from the beach. <br/>Came here to meet my parents after having studied a year at UCSD. We stayed at the Alexander at 5225 Collins Ave. First time on a jetski. <br/>Later went with Marcus in May 2016. Spent most of the time at the beach. Rented a Jeep Patriot and drove to Sawgrass Mills in Fort Lauderdale. Bought a bunch of clothes. Also drove to Key Biscayen. Rode bikes all throughout Miami Beach, downtown, coconut grove, wyndwood walls, etc. Saw the awesome grafitti, old mansion museum and lots more. 
+comment2
 
 |FL, Naples
 *26.142036*-81.794810* 
-Stayed there for a couple of days with my parents at a hotel. Saw 4th of July on the beach.
+comment3
 
 |FL, Tampa
 *27.950575*-82.457178* 
-Stayed there for a couple of days with my parents at a hotel. Went kayaking in the pacific.
+comment4
 
 |FL, Kissimme
 *28.291956*-81.407571* 
-Stayed there a week with my parents in a beautiful rented house with a pool right on the edge of a forest.
+comment5
 
 |FL, Orlando
 *28.538335*-81.379236* 
-Went to Disney World which is huge and by far the biggest of its kind - Saw the park and epcot. Went to Kennedy Space Center on two occasions. <br/>On my second trip to Kennedy Space Center I saw the Atlantis shuttle in the assembly hall before it had been cleaned and displayed.
+comment
 
 |GA, Atlanta
 *33.748995*-84.387982* 
-Slept in the car because the hotel wasn't open. Left immediately after. Terrible city. Huge roads in the middle of the city and not very clean.
+comment
 
 |AL, Birmingham
 *33.520661*-86.802490* 
-Stayed there overnight.
+comment
 
 |TN, Memphis
 *35.149534*-90.048980* 
-Stayed there overnight.
+comment
 
 |OK, Oklahoma City
 *35.467560*-97.516428* 
-Saw the bombing memorial. Lots of chairs. Probably one for each victim.
+comment
 
 |TX, Amarillo
 *35.221997*-101.831297* 
-Awesome hotels with vouchers. Free steak if you could eat it. I did not try it.
+comment
 
 |NM, Santa Fe
 *35.686975*-105.937799* 
-Indians selling junk. Some guy showed us a nice church.
+comment
 
 |NM, Albuquerque
 *35.110703*-106.609991* 
-Only stayed there for a little while. Pretty decent city. A little boring.
+comment
 
 |AZ, Petrified Forest NP
 *34.909990*-109.806792* 
-Very cool place. Large pieces of trees had been made into stone and the rings were clearly visible.
+comment
 
 |AZ, Flagstaff
 *35.198284*-111.651302* 
-Pretty boring. Some native american stuff.
+comment
 
 |AZ, Phoenix
 *33.448377*-112.074037* 
-This is where I finally got my baggage. It had been flown from MIA to here.
+comment
 
 |CA, San Diego
 *32.715738*-117.161084* 
-Slept there for two nights and went to the beach. <br/>Lived there for a year while studying at UCSD.
+comment
 
 |CA, Los Angeles
 *34.052234*-118.243685* 
-Stayed there for a month after high school. Spent most of the time eating dominos at the beach but I also saw most of the city.<br/>Went there with my parents for vacation. Stayed at Marina Del Rey and ate at The Warehouse (www.mdrwarehouse.com). Later went there alone after UCSD. Saw most of the beaches, Dodger stadium, La Brea Tar Pits, Rodeo Drive, Some old ship, etc...
+comment
 
 |CA, San Francisco
 *37.774929*-122.419416* 
-Been there three times. Always terrible weather. Beautiful place to be at christmas. And awesome chinatown.
+comment
 
 |CA, Yosemite NP
 *37.865101*-119.538329* 
-First time I was there, the weather was terrible. Second time I was there with my dad and the weather was perfect. We hiked to a waterfall where we ate lunch.
+comment
 
 |CA, Death Valley NP
 *36.505389*-117.079408* 
-Drove around. Pretty hot. Pretty desolate. Pretty... pretty.
+comment
 
 |NV, Las Vegas
 *36.169941*-115.139830* 
-Gambling. Drinking. Oh, and the lights. Looks fancy. Been there after high school, with friends at UCSD, and with my family.
+comment
 
 |NV, Hoover Dam
 *36.016066*-114.737732* 
-Been there too many times. It's a dam. Big whoop.
+comment
 
 |AZ, Grand Canyon
 *36.231719*-113.030911* 
-First time after high school I went to the indian reservation that covers part of the grand canyon. Later, with my parents, I went to the official part and hiked a lot.
+comment
 
 |UT, Zion NP
 *37.322817*-113.045716* 
-Did a fair amount of hiking here. Great trails and beautiful scenery.
+comment
 
 |UT, Bryce Canyon NP
 *37.593038*-112.187090* 
-Been here after highschool and later with my family. I have never seen anything like it. Layered coloring of the rocks ranging from red and yellow to white. Also did a lot of hiking here.
+comment
+
 |UT, Salt Lake City
 *40.760779*-111.891047* 
-Cleanest place on earth. Those mormons know how to run a city.
+comment
 
 |WY, Yellowstone NP
 *44.427963*-110.588455* 
-Drove around the figure eight and slept in a log cabin at night. It snowed. Amazingly beautiful place.
-
-|SD, Mount Rushmore
-*43.879102*-103.459067* 
-First time I was there, the weather was bad and I couldn't see the heads. Next time was great and I saw it all. Looked smaller than I imagined.
-
-|SD, Rapid City
-*44.080543*-103.231015* 
-Slept there while visiting Mount Rushmore. Looked more like a rest stop than a city, but they were building everywhere so it might be decent now.
-
-|IL, Chicago
-*41.878114*-87.629798* 
-Fancy parks, malls, and cool elevated trains (L).
-
-|IN, Indianapolis
-*39.768403*-86.158068* 
-Went to Lucas Oil Stadium but it was closed so I couldn't get in. Also, I went to White Castle. Not as great as the movie makes it out to be.
-
-|NY, New York City
-*40.71448*-74.00598* 
-Went to Battery Park to take a ferry to Liberty Island to see the Statue of Liberty. Then Ellis Island to see the old immigration office. Saw Ground Zero. The financial district. Went up in the Empire State building. Went to Macys (huge department store) and the Apple Store (glass box). Went to MOMA, Guggenheim, and the Met. Walked around Central Park. Saw Times Square. All this, while living in New Jersey. Took about a week and then flew home to Denmark.
-Later, went there with parents in 2015. Walked all around Manhattan, from battery park to the top of central park on 110th street. Stayed at An Affinia hotel on 23rd and 7th.
-
-|DC
-*38.907192*-77.036871* 
-White House, all the memorials.
-
-#Turkey
-|Istanbul
-*41.005270*28.976960* 
-Class trip. Saw some mosques, including Haiga Sofia. Got drunk in terrible turkish bear. A cab driver stiffed us.
-
-#Greece
-|Corfu
-*39.611839*19.830605* 
-Family vacation when I was 8. Took long walks/trecks and went to the beach.
-
-|Crete
-*35.240117*24.809269* 
-Family vacation when I was 12. Went for walks and saw the cities.
-
-#Spain
-|Malaga
-*36.721261*-4.421266* 
-Family vacation. Flew to Malaga airport. Went to Marbella and watched Yatchs. Later with friends.
-
-|Torremolinos
-*36.622554*-4.499477* 
-Family when I was 6. Later with friends. Got drunk and hiked.
-
-|Mallorca
-*39.695263*3.017571* 
-Vacation with friends.
-
-|Mijas
-*36.596775*-4.632307* 
-White city. Looks awesome.
-
-#Italy
-|Venice
-*45.440847*12.315515* 
-Family when I was 10.
-
-|Verona
-*45.438384*10.991622* 
-Family when I was 11.
-
-|Lago de Garda
-*45.604939*10.635141* 
-Family vacation when I was 11. Been all around the lake.
-
-|Sardegna
-*40.120875*9.012893* 
-Family vacation. Years later also with friends. Drove an awesome little car.
-
-#Germany
-|Berlin*52.520007*13.404954* 
-Class trip with my primary school. Stayed with a German family speaking mostly german as they knew little English. It was fun and I saw the Reichstag and some of the broken down Berlin wall.
-
-|Hamburg
-*53.5510846*9.9936818* 
-Been to the airport many times. Have driven through the city.
-
-|Munich
-*48.1351253*11.5819806* 
-Went to visit Marcus where he lives. Drank beer. Did some sightseeing, among the more exciting things were the olympics stadium and the BMW factory/showroom. Saw some churches. Ate some wierd german breakfast with white sausages, sweet mustard and drank beer. Had christmas lunch with real life germans.
-
-#United Kingdom 
-|London
-*51.507351*-0.127758* 
-Trip with friends to see the city. Took a canal tour through the city. Then went to buckingham palace. And finally took a bus tour. All in all a beautiful city, albeit slightly cramped.<br/>
-Went to visit Peter Halmoe and saw St. Paul's cathedral, the Eye, Big Ben, Tower and the brigde, Buckingham palace and finally Hide park. Also saw Wales beat England at rugby (@Twickenham) at a pub.
-
-|Nottingham
-*52.954783*-1.158109* 
-Trip with friends for a WoW guild (Exodus) meeting. Great city, great forest, and cool WW2 bomb shelters. Super old bar inside a tree. Nice city center and other great bars.
-
-|Sunningdale
-*51.392454*-0.630136*
-CbD Communicating with Impact course. Pretty much a PPT course. We ate well and drank at night. When it ended I took a train to London.
-
-#Switzerland
-|Basel
-*47.567442*7.597551* 
-Family vacation.
-
-|Bodensee
-*47.636338*9.389245* 
-(Lake Constance) Family.
-
-#Mexico 
-|Tijuana
-*32.514947*-117.038247* 
-Trip with friend during my first visit to USA. Drove through the bad parts and to a big fenced community to get something to drink and eat. Most of the city  is sheds and dirt roads.
-
-|Ensenada
-*31.857778*-116.605833* 
-Trip with friend during my exchange student stay in San Diego. Much nicer than Tijuana, and the police and bar owners are super friend towards turists so as to not get a bad reputation and blow the turism.
-
-#Canada
-|Toronto
-*43.653226*-79.383184* 
-Visited the Beer Store and stayed there some days while the car was repaired. The canadians, like the mormons, know how to run a clean city.
-
-|Niagara Falls
-*43.089558*-79.084944* 
-Fancy waterfall on the border to New York. When entering Canada our entire car got searched because of a misunderstanding but on our way back to the US we hardly got asked any questions.
-
-#France
-|Avoriaz
-*46.189683*6.776343* 
-First highschool ski trip. Drank and skiied.
-
-|Val Thorens
-*45.296603*6.584663* 
-Second highschool ski trip. Drank even more and skiied less.
-
-#Lichtenstein
-|Vaduz
-*47.141370*9.520700* 
-Family vacation. Walk along the main street and saw all the million dollar houses.
-
-#Austria
-|Salzburg
-*47.809490*13.055010* 
-Family vacation. Salt mines and slides with white jumpsuites. Had a blast. Also went to see some fancy stone museum.
-
-|Zell am see
-*47.323520*12.796850* 
-Skiing with family.
-
-|Kaprun
-*47.272888*12.759674* 
-Skiing with family.
-
-|Kitzbuhel
-*47.444990*12.391430* 
-Family vacation.
-
-|Wattens
-*47.294725*11.589983* 
-Camping site with a forest in the back. Long walks along the trail.
-
-|Innsbruck
-*47.269212*11.404102* 
-Family vacation many times.
-
-|Samnaun
-*46.950477*10.371739* 
-Family vacation.
-
-#Sweden
-|Salen
-*61.174420*13.260710* 
-Family ski trip when I was 12.
-
-|Stockhom
-*59.329323*18.068581*
-CbD trips with IBM for various courses.
-
-|Solna
-*59.368879*18.008433*
-CbD Nordic Days with IBM at the friends arena.
-
-|Kista
-*59.402434*17.946482*
-Some IBM CbD stuff. Don't remember what the course was about.
-
-#Norway
-|Oslo
-*59.913869*10.752245* 
-Family ski trips.
-
-|Trysil
-*61.279677*12.288407* 
-Family ski trips.
-
-|Lillehamer
-*61.115271*10.466231* 
-Family ski trips.
-
-|Dovre
-*61.984386*9.253990* 
-Family ski trips.
-
-|Hemsedal
-*60.863072*8.552333* 
-Family ski trips.
-
-|Hovden
-*59.560300*7.356800* 
-Family ski trips.
-
-|Bergen
-*60.391263*5.322054* 
-Family ski trips.
-
-#South Korea
-|Seoul
-*37.5172363*127.0473248* 
-Trip with friends. Saw a bunch of temples. Lived in Gangnam and went to most of the areas of Seoul. Went to The Octagon. Walked up a mountain - Koreans are good at that stuff + they are fully kitted out. Ate fried silk worms... shit was crazy. Also went to the border with North Korea and walked through the underground tunnels and saw the museum. The bus ride from Seoul was very long.
-
-#Hungary
-|Budapest
-*47.4925*19.0514*
-Trip with friends. Saw a bunch of castles, a dungeon (where they supposedly kept Dracula), an island in the river, both Buda and Pest, and that escape game where you're supposed to get out of a room by solving puzzles. Saw the cool train station where Marcus arrived.
-
-#Czech Republic
-|Prague
-*1*1*
-TODO coordinates! Went to the Leading with Impact course with IBM. On the first day I saw Wenceslas Square, Old Town, Prague Castle and Charles Bridge at day. The next day I went out with colleagues and saw most of the things again and they looked better at night. The course was ok.
+comment
