@@ -2,9 +2,10 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.*;
 import java.awt.geom.Point2D.Double;
+import javax.swing.*;
 
 public class MyListener implements MouseListener, MouseMotionListener, 
-				   MouseWheelListener, ActionListener{
+				   MouseWheelListener, ActionListener, ItemListener {
     public int minZoomLevel = -40, maxZoomLevel = 0, zoomLevel = 0;
     public double zoomMult = 1.1;
     private Point drag1, drag2;
@@ -12,6 +13,36 @@ public class MyListener implements MouseListener, MouseMotionListener,
 
     public MyListener(Gui g){
 	this.g = g;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+	JMenuItem menuItem = (JMenuItem) e.getSource();
+	System.out.println("menu item text: "+menuItem.getText());
+	
+	if(menuItem.getText().equals("Text view")){
+	    g.textView();
+	} else if(menuItem.getText().equals("Map view")){
+	    g.mapView();
+	    g.hideText();
+	} else if(menuItem.getText().equals("Map/Text view")){
+	    g.showText();
+	} else if(menuItem.getText().equals("Greyscale")){
+	    ColorScheme.setGrey();
+	    g.map.repaint();
+	} else if(menuItem.getText().equals("Blue/Green")){
+	    ColorScheme.setBlueGreen();
+	    g.map.repaint();
+	} else if(menuItem.getText().equals("Textures")){
+	    System.out.println("not yet implemented");
+	    /*
+	    map.cs.setTexture();
+	    map.repaint();
+	    */
+	}
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+	System.out.println("itemStateChanged: " + e);
     }
 
     public void mouseClicked(MouseEvent e){}
@@ -50,7 +81,9 @@ public class MyListener implements MouseListener, MouseMotionListener,
 	    g.map.capTransform();
 	    drag1 = drag2;
 	    g.map.repaint();
-	}catch(Exception ex){ex.printStackTrace();}
+	}catch(Exception ex){
+	    ex.printStackTrace();
+	}
     }
     
     private void zoomCamera(MouseWheelEvent e){
@@ -71,9 +104,5 @@ public class MyListener implements MouseListener, MouseMotionListener,
 	    g.map.coordTransform.translate(p2.x-p1.x, p2.y-p1.y);
 	    g.map.repaint();
 	}
-    }
-    
-    public void actionPerformed(ActionEvent e){
-	g.buttonAction(e.getActionCommand());
     }
 }

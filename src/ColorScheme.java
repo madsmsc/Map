@@ -7,12 +7,34 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class ColorScheme{
-    public Paint water, land, visited, selected, border, text;
-    public ColorScheme(){
+    private static final Color
+	col7,
+	col5,
+	col4,
+	col2,
+	colW,
+	colL, 
+	colV;
+    
+    public static Paint water, land, visited, selected, border, text;
+
+    static {
+	col7 = new Color(0.77f, 0.77f, 0.77f);
+	col5 = new Color(0.55f, 0.55f, 0.55f);
+	col4 = new Color(0.44f, 0.44f, 0.44f);
+	col2 = new Color(0.22f, 0.22f, 0.22f);
+	colW = new Color(115.0f/255.0f, 151.0f/255.0f, 240.0f/255.0f);
+	colL = new Color(95.0f/255.0f, 165.0f/255.0f, 114.0f/255.0f);
+	colV = new Color(120.0f/255.0f, 185.0f/255.0f, 135.0f/255.0f);
+
 	setGrey();
     }
+    
+    private ColorScheme(){
 
-    private Paint getTexture(String s){
+    }
+
+    private static Paint getTexture(String s){
 	double scale = 0.2;
 	TexturePaint tp = null;
 	try{
@@ -26,30 +48,30 @@ public class ColorScheme{
 	return tp;
     }
 
-    public void setTexture(){
+    public static void setTexture(){
 	water = getTexture("data/water.jpg");
 	land = getTexture("data/grass.jpg");
-	visited = new Color(0.11f, 0.32f, 0.19f);
+	visited = getTexture("data/grid.jpg");
 	selected = Color.darkGray;
 	border = Color.lightGray;
 	text = Color.white;
     }	
 
-    public void setBlueGreen(){
-	water = new Color(115.0f/255.0f, 151.0f/255.0f, 240.0f/255.0f);
-	land = new Color(95.0f/255.0f, 165.0f/255.0f, 114.0f/255.0f);
-	visited = new Color(120.0f/255.0f, 185.0f/255.0f, 135.0f/255.0f);
+    public static void setBlueGreen(){
+	water = colW;
+	land = colL;
+	visited = colV;
 	selected = Color.darkGray;
 	border = Color.black;
 	text = Color.white;
     }
 
-    public void setGrey(){
-	water = new Color(0.77f, 0.77f, 0.77f);
-	land = new Color(0.55f, 0.55f, 0.55f);
-	visited = new Color(0.44f, 0.44f, 0.44f);
-	selected = new Color(0.22f, 0.22f, 0.22f);
-	border = new Color(0.77f, 0.77f, 0.77f);
+    public static void setGrey(){
+	water = col7;
+	land = col5;
+	visited = col4;
+	selected = col2;
+	border = col7;
 	text = Color.white;
     }
 }
