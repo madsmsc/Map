@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <style>
       body { background-color: lightgrey; }
+      html, body { margin: 0; padding: 0; }
     </style>
   </head>
   <body>
@@ -12,7 +13,7 @@
       import { Parser } from './Parser.js';
       import { Render } from './Render.js';
       window.addEventListener("load", () => {
-          const parser = new Parser('../data/large.shp');
+          const parser = new Parser();
           parser.ready.then(() => {
               new Render(parser.polys, parser.xrange, parser.yrange).render();
           });

@@ -1,12 +1,15 @@
 export class Parser {
-    constructor(fileName) {
+    constructor() {
         this.polys = [];
         this.xrange = [0, 0];
         this.yrange = [0, 0];
-        this._offset = 0;
-        // Start loading the file using fetch
-        this.ready = Promise.all([
-            fetch(fileName).then(response => {
+        this.offset = 0;
+        this.ready = this.parseFiles()
+    }
+
+    parseFiles() {
+        return Promise.all([
+            fetch('../data/large.shp').then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.arrayBuffer();
             }),
@@ -17,13 +20,10 @@ export class Parser {
                 this.dataView = new DataView(arrayBuffer);
                 this.parseHeader();
                 this.polys = this.parseObjects();
-
-                // Parse names and visited
                 const names = namesText.split(/\r?\n/).filter(line => line.length > 0);
                 const visitedArr = visitedText.split(/\r?\n/).filter(line => line.length > 0);
                 const info = this.parseVisited(visitedArr);
-
-                this.postParsing(this.polys, names, visitedArr, info);
+                this.postParsing(names, visitedArr, info);
             })
             .catch(error => {
                 console.error('Error loading file:', error);
@@ -31,20 +31,14 @@ export class Parser {
     }
 
     parseVisited(visited) {
-        let info = [];
-        let tmp = [];
-        let vstr = '';
-        for (const str of visited) vstr += str;
-        const countries = vstr.split('#');
+        let fullCountryStrings = [];
+        const countries = visited.join('').split('#').splice(1);
+        visited.length = 0; // changed to just country names
         for (const country of countries) {
-            if (country === countries[0]) continue;
-            const cities = country.split('|');
-            tmp.push(cities[0].trim());
-            info.push(country);
+            visited.push(country.split('|')[0].trim());
+            fullCountryStrings.push(country);
         }
-        visited.length = 0;
-        for (const s of tmp) visited.push(s);
-        return info;
+        return fullCountryStrings;
     }
 
     parseHeader() {
@@ -68,7 +62,7 @@ export class Parser {
         const maxM = getDoubleLE();
         this.xrange = [minX, maxX];
         this.yrange = [minY, maxY];
-        this._offset = offset;
+        this.offset = offset;
         console.log(`File length: ${fileLength}
 Version: ${version}
 Shape type: ${shapeType}
@@ -76,86 +70,76 @@ MBR: ${parseInt(minX)}, ${parseInt(minY)}, ${parseInt(maxX)}, ${parseInt(maxY)}`
     }
 
     parseObjects() {
-        let offset = this._offset;
+        let offset = this.offset;
         const polys = [];
         for (let r = 0; r < 100000; r++) {
             try {
-                const poly = new Poly();
-                poly.number = this.dataView.getInt32(offset, true); offset += 4;
-                poly.length = this.dataView.getInt32(offset, true); offset += 4;
-                poly.type = this.dataView.getInt32(offset, true); offset += 4;
-                poly.minX = this.dataView.getFloat64(offset, true); offset += 8;
-                poly.minY = this.dataView.getFloat64(offset, true); offset += 8;
-                poly.maxX = this.dataView.getFloat64(offset, true); offset += 8;
-                poly.maxY = this.dataView.getFloat64(offset, true); offset += 8;
-
-                // Read number of parts and points
-                const numParts = this.dataView.getInt32(offset, true); offset += 4;
-                const numPoints = this.dataView.getInt32(offset, true); offset += 4;
-
-                // Read parts array
-                for (let i = 0; i < numParts; i++) {
-                    poly.parts.push(this.dataView.getInt32(offset, true));
-                    offset += 4;
-                }
-
-                // Read points array
-                for (let i = 0; i < numPoints; i++) {
-                    const x = this.dataView.getFloat64(offset, true); offset += 8;
-                    const y = this.dataView.getFloat64(offset, true); offset += 8;
-                    poly.points.push({ x, y });
-                }
-
-                polys.push(poly);
+                offset = this.parsePoly(offset, polys);
             } catch (e) {
-                break;
+                break; // parse up to 100k lines or until error
             }
         }
-        this._offset = offset;
+        this.offset = offset;
         console.log(`${polys.length} objects read (max 100k)`);
         return polys;
     }
 
-    postParsing(polys, names, visited, info) {
-        if (polys.length !== names.length) {
+    parsePoly(offset, polys) {
+        const poly = new Poly();
+        poly.number = this.dataView.getInt32(offset, true); offset += 4;
+        poly.length = this.dataView.getInt32(offset, true); offset += 4;
+        poly.type = this.dataView.getInt32(offset, true); offset += 4;
+        poly.minX = this.dataView.getFloat64(offset, true); offset += 8;
+        poly.minY = this.dataView.getFloat64(offset, true); offset += 8;
+        poly.maxX = this.dataView.getFloat64(offset, true); offset += 8;
+        poly.maxY = this.dataView.getFloat64(offset, true); offset += 8;
+        const numParts = this.dataView.getInt32(offset, true); offset += 4;
+        const numPoints = this.dataView.getInt32(offset, true); offset += 4;
+        for (let i = 0; i < numParts; i++) { // parts array
+            poly.parts.push(this.dataView.getInt32(offset, true));
+            offset += 4;
+        }
+        for (let i = 0; i < numPoints; i++) { // points array
+            const x = this.dataView.getFloat64(offset, true); offset += 8;
+            const y = this.dataView.getFloat64(offset, true); offset += 8;
+            poly.points.push({ x, y });
+        }
+        polys.push(poly);
+        return offset;
+    }
+
+    postParsing(names, visited, info) {
+        console.log(this.polys);
+        if (this.polys.length !== names.length) {
             console.log('Shapefile does not match names.txt.');
             return;
         }
-        for (let i = 0; i < polys.length; i++) {
-            polys[i].name = names[i];
-            polys[i].cities = [];
+        for (let i = 0; i < this.polys.length; i++) {
+            this.polys[i].name = names[i];
+            this.polys[i].cities = [];
             const index = visited.indexOf(names[i]);
             if (index === -1) continue;
-            const cities = info[index].split('|');
-            for (const city of cities) {
-                if (city === cities[0]) continue;
-                const str = city.split('*');
-                if (str.length === 4) {
-                    const x = parseFloat(str[1]);
-                    const y = parseFloat(str[2]);
-                    polys[i].cities.push({
-                        name: str[0],
-                        x: x,
-                        y: y,
-                        info: str[3]
-                    });
-                } else if (str.length === 2) {
-                    polys[i].cities.push({
-                        name: str[0],
-                        x: 0,
-                        y: 0,
-                        info: str[1]
-                    });
-                }
-            }
+            info[index].split('|').splice(1).forEach(c => this.postParsingCity(c, this.polys[i]));
         }
-        // Optionally print info
-        // let sameType = true;
-        // const whichType = polys[0].type;
-        // for (let i = 0; i < polys.length; i++)
-        //     if (polys[i].type !== whichType) sameType = false;
-        // console.log(`Are all objects of type ${whichType}? ${sameType ? 'YES' : 'NO'}`);
-        // console.log('> starting gui.');
+    }
+
+    postParsingCity(city, poly) {
+        const str = city.split('*');
+        if (str.length === 4) {
+            poly.cities.push({
+                name: str[0],
+                x: parseFloat(str[1]),
+                y: parseFloat(str[2]),
+                info: str[3]
+            });
+        } else if (str.length === 2) {
+            poly.cities.push({
+                name: str[0],
+                x: 0,
+                y: 0,
+                info: str[1]
+            });
+        }
     }
 }
 

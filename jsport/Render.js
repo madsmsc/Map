@@ -1,3 +1,4 @@
+
 export class Render {
     glCanvas = null;
     gl = null;
@@ -12,20 +13,18 @@ export class Render {
     pan = { x: 0.0, y: 0.0 };
     isDragging = false;
     lastMouse = { x: 0, y: 0 };
+    selectedPoly = null;
 
-    // Add color definitions similar to ColorScheme in Map.java
     colorWater = [0.3, 0.7, 1.0, 1.0];
     colorLand = [0.8, 0.8, 0.7, 1.0];
     colorVisited = [0.6, 0.9, 0.6, 1.0];
     colorBorder = [0.1, 0.1, 0.1, 1.0];
-    colorSelected = [0.6, 0.6, 0.6, 1.0]; // grey
-
-    selectedPoly = null; // Track the selected polygon
+    colorSelected = [0.6, 0.6, 0.6, 1.0];
 
     constructor(polys, xrange, yrange) {
         this.glCanvas = document.getElementById("gl-canvas");
         this.gl = this.glCanvas.getContext("webgl");
-        this.shaderProgram = this.createTestShaderProgram();
+        this.shaderProgram = this.#createShaderProgram();
         this.aVertexPosition = this.gl.getAttribLocation(this.shaderProgram, "aVertexPosition");
         this.uZoom = this.gl.getUniformLocation(this.shaderProgram, "uZoom");
         this.uPan = this.gl.getUniformLocation(this.shaderProgram, "uPan");
@@ -64,21 +63,9 @@ export class Render {
         return { vertices: new Float32Array(vertices), polyOffsets };
     }
 
-    // Extracted helper for fill color selection
-    getFillColor(poly) {
-        if (this.selectedPoly === poly) {
-            return this.colorSelected;
-        } else if (poly.cities && poly.cities.length > 0) {
-            return this.colorVisited;
-        } else {
-            return this.colorLand;
-        }
-    }
-
-    // Helper to get the actual number of points to draw for a ring
     getActualRingLength(poly, start, end) {
         let ringLen = end - start;
-        if (ringLen < 3) return 0; // Not enough points for a polygon
+        if (ringLen < 3) return 0; // not enough points for a polygon
 
         const first = poly.points[start];
         const last = poly.points[end - 1];
@@ -88,21 +75,6 @@ export class Render {
         }
         if (actualLen < 3) return 0;
         return actualLen;
-    }
-
-    // Add this helper inside your Render class:
-    getConvexRingIndices(poly, start, end) {
-        // Returns the indices for a convex ring, skipping duplicate closing point if present
-        let ringLen = end - start;
-        if (ringLen < 3) return null;
-        const first = poly.points[start];
-        const last = poly.points[end - 1];
-        let actualLen = ringLen;
-        if (ringLen > 3 && first.x === last.x && first.y === last.y) {
-            actualLen -= 1;
-        }
-        if (actualLen < 3) return null;
-        return { start, count: actualLen };
     }
 
     renderPolys(polys, xrange, yrange) {
@@ -125,29 +97,7 @@ export class Render {
         this.gl.uniform1f(this.uZoom, this.zoom);
         this.gl.uniform2f(this.uPan, this.pan.x, this.pan.y);
 
-        let globalOffset = 0;
-        polys.forEach(poly => {
-            let fillColor = this.getFillColor(poly);
-
-            if (poly.parts && poly.parts.length > 0) {
-                // --- Modified loop using getConvexRingIndices ---
-                for (let p = 0; p < poly.parts.length; p++) {
-                    const start = poly.parts[p];
-                    const end = (p + 1 < poly.parts.length) ? poly.parts[p + 1] : poly.points.length;
-                    const ring = this.getConvexRingIndices(poly, start, end);
-                    if (!ring) continue;
-
-                    // Draw filled polygon (convex only)
-                    this.setFillColor(fillColor);
-                    this.gl.drawArrays(this.gl.TRIANGLE_FAN, globalOffset + ring.start, ring.count);
-
-                    // Draw border
-                    this.setFillColor(this.colorBorder);
-                    this.gl.drawArrays(this.gl.LINE_LOOP, globalOffset + ring.start, ring.count);
-                }
-                globalOffset += poly.points.length;
-            }
-        });
+        this.drawPolyArrays(polys);
 
         const err = this.gl.getError();
         if (err !== this.gl.NO_ERROR) {
@@ -155,15 +105,47 @@ export class Render {
         }
     }
 
-    // Helper to set fill color uniform (adds uFillColor if needed)
-    setFillColor(color) {
+    drawPolyArrays(polys) {
+        let globalOffset = 0;
+        polys.filter(poly => poly.parts && poly.parts.length > 0).forEach(poly => {
+            let fillColor = this.getPolyFillColor(poly);
+            for (let p = 0; p < poly.parts.length; p++) {
+                const startPart = poly.parts[p];
+                const endPart = (p + 1 < poly.parts.length) ? poly.parts[p + 1] : poly.points.length;
+                const ringLength = endPart - startPart;
+                if (ringLength < 3) return null;
+                const firstPoint = poly.points[startPart];
+                const lastPoint = poly.points[endPart - 1];
+                const sameStartEnd = firstPoint.x === lastPoint.x && firstPoint.y === lastPoint.y;
+                const actualLen = ringLength > 3 && sameStartEnd ? ringLength - 1 : ringLength;
+                if (actualLen < 3) return;
+
+                this.setDrawColor(fillColor);
+                this.gl.drawArrays(this.gl.TRIANGLE_FAN, globalOffset + startPart, actualLen);
+                this.setDrawColor(this.colorBorder);
+                this.gl.drawArrays(this.gl.LINE_LOOP, globalOffset + startPart, actualLen);
+            }
+            globalOffset += poly.points.length;
+        });
+    }
+
+    getPolyFillColor(poly) {
+        if (this.selectedPoly === poly) {
+            return this.colorSelected;
+        } else if (poly.cities && poly.cities.length > 0) {
+            return this.colorVisited;
+        } else {
+            return this.colorLand;
+        }
+    }
+
+    setDrawColor(color) {
         if (!this.uFillColor) {
             this.uFillColor = this.gl.getUniformLocation(this.shaderProgram, "uFillColor");
         }
         this.gl.uniform4fv(this.uFillColor, color);
     }
 
-    // Extracted from setupZoomPanHandlers
     handlePolygonClick(e) {
         // Convert mouse to normalized device coordinates
         const rect = this.glCanvas.getBoundingClientRect();
@@ -241,11 +223,10 @@ export class Render {
             this.isDragging = false;
         });
 
-        // --- Polygon click handler ---
         this.glCanvas.addEventListener('click', this.handlePolygonClick.bind(this));
     }
 
-    // Ray-casting algorithm for point-in-polygon
+    // ray-casting algorithm for point-in-polygon
     pointInPoly(point, vs) {
         let x = point.x, y = point.y;
         let inside = false;
@@ -259,8 +240,7 @@ export class Render {
         return inside;
     }
 
-    createTestShaderProgram() {
-        const vsSource = `
+    #vsSource = `
         attribute vec2 aVertexPosition;
         uniform float uZoom;
         uniform vec2 uPan;
@@ -268,25 +248,29 @@ export class Render {
             vec2 pos = (aVertexPosition + uPan) * uZoom;
             gl_Position = vec4(pos, 0.0, 1.0);
         }`;
-        const fsSource = `
+
+    #fsSource = `
         precision mediump float;
         uniform vec4 uFillColor;
         void main(void) {
             gl_FragColor = uFillColor;
         }`;
-        function createShader(gl, type, source) {
-            const shader = gl.createShader(type);
-            gl.shaderSource(shader, source);
-            gl.compileShader(shader);
-            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                console.error('Shader compile failed:', gl.getShaderInfoLog(shader));
-                gl.deleteShader(shader);
-                return null;
-            }
-            return shader;
+
+    #createShader(gl, type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            console.error('Shader compile failed:', gl.getShaderInfoLog(shader));
+            gl.deleteShader(shader);
+            return null;
         }
-        const vertexShader = createShader(this.gl, this.gl.VERTEX_SHADER, vsSource);
-        const fragmentShader = createShader(this.gl, this.gl.FRAGMENT_SHADER, fsSource);
+        return shader;
+    }
+
+    #createShaderProgram() {
+        const vertexShader = this.#createShader(this.gl, this.gl.VERTEX_SHADER, this.#vsSource);
+        const fragmentShader = this.#createShader(this.gl, this.gl.FRAGMENT_SHADER, this.#fsSource);
         const program = this.gl.createProgram();
         this.gl.attachShader(program, vertexShader);
         this.gl.attachShader(program, fragmentShader);
